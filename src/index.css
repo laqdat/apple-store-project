@@ -1,13 +1,28 @@
-body {
+/* Reset mặc định của trình duyệt */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  /* Font chữ trứ danh của Apple */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #fff; /* Nền trắng tinh khôi */
+  color: #1d1d1f; /* Màu chữ đen xám nhẹ, không đen kịt */
+  -webkit-font-smoothing: antialiased; /* Làm chữ mượt mà hơn */
+  line-height: 1.5;
+}
+
+/* Class tiện ích dùng chung */
+.container {
+  max-width: 1024px; /* Giới hạn chiều rộng nội dung để không bị bè ra 2 bên */
+  margin: 0 auto; /* Tự động căn giữa màn hình */
+  padding: 0 20px;
+}
+
+/* Bỏ gạch chân cho thẻ a */
+a {
+  text-decoration: none;
+  color: inherit;
 }

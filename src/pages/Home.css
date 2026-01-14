@@ -1,0 +1,81 @@
+.hero-section {
+  text-align: center;
+  padding-top: 60px;
+  height: 600px; /* Banner cao */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.black-theme {
+  background-color: #000;
+  color: #fff;
+}
+
+.white-theme {
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.hero-title {
+  font-size: 56px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.hero-subtitle {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.hero-links {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+/* Nút bấm chuẩn Apple */
+.btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 17px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-blue {
+  background-color: #0071e3;
+  color: white;
+}
+
+.btn-link {
+  background: none;
+  color: #2997ff;
+  font-size: 19px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #1d1d1f;
+  color: #1d1d1f;
+}
+
+/* Giả lập ảnh sản phẩm bằng khối màu Gradient */
+.hero-image-placeholder {
+  width: 1000%;
+  max-width: 1000px;
+  height: 300px;
+  margin-top: 5px; /* Cách cái nút bấm ra một chút */
+  display: flex;       /* Căn giữa ảnh */
+  justify-content: center;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+.hero-img {
+  width: 100%;       /* Ảnh co giãn theo khung */
+  height: auto;      /* Giữ nguyên tỉ lệ ảnh không bị méo */
+  object-fit: contain; /* Đảm bảo hiển thị trọn vẹn ảnh */
+}

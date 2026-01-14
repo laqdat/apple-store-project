@@ -1,0 +1,122 @@
+.mac-page {
+  background-color: #fff;
+  padding-bottom: 100px;
+  overflow-x: hidden; /* Chặn thanh cuộn ngang */
+}
+
+/* HERO SECTION */
+.mac-hero {
+  text-align: center;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  background-color: #fff;
+}
+
+.mac-title {
+  font-size: 80px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1d1d1f;
+}
+
+.mac-subtitle {
+  font-size: 28px;
+  font-weight: 500;
+  color: #1d1d1f;
+}
+
+/* VIDEO ANIMATION SECTION */
+.mac-video-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.mac-video-container {
+  width: 100%; /* Mặc định full màn */
+  max-width: 1400px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  will-change: transform; /* Tối ưu hiệu năng cho trình duyệt */
+  /* transition: transform 0.1s linear;  <-- Nếu muốn mượt hơn thì bỏ comment, nhưng để raw sẽ phản hồi nhanh hơn */
+}
+
+.mac-video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* FEATURE SECTION */
+.mac-features {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.feature-text {
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.feature-text h2 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.feature-text p {
+  font-size: 24px;
+  color: #86868b;
+  line-height: 1.4;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background-color: #f5f5f7;
+  padding: 40px;
+  border-radius: 24px;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px); /* Nổi lên khi di chuột */
+}
+
+.feature-card h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #ff0055, #0071e3); /* Chữ màu gradient cho chất chơi */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-card p {
+  font-size: 17px;
+  color: #1d1d1f;
+  line-height: 1.5;
+}
+
+/* PRODUCTS SECTION */
+.mac-products-section {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-heading {
+  font-size: 40px;
+  margin-bottom: 50px;
+  font-weight: 600;
+}

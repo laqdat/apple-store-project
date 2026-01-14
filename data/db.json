@@ -1,0 +1,430 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "iPhone 15 Pro Max",
+      "category": "iphone",
+      "price": 34999000,
+      "image": "/images/iphone15promax.png",
+      "specs": [
+        "Vỏ Titanium",
+        "Chip A17 Pro",
+        "Camera Zoom 5x"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "MacBook Air M2",
+      "category": "mac",
+      "price": 24999000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/macbook-air-midnight-select-20220606?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1653084303665",
+      "specs": [
+        "Chip Apple M2",
+        "Màn hình Liquid Retina 13.6 inch",
+        "2 cổng Thunderbolt / USB 4",
+        "Pin lên đến 18 giờ"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "iPad Pro M4",
+      "category": "ipad",
+      "price": 21999000,
+      "image": "/images/ipadproM4.png",
+      "specs": [
+        "Chip M4",
+        "Màn hình OLED Ultra Retina XDR",
+        "Mỏng nhất từ trước đến nay"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "AirPods Pro 2",
+      "category": "accessories",
+      "price": 6199000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MTJV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1694014871985"
+    },
+    {
+      "id": "7",
+      "name": "iMac M3",
+      "category": "mac",
+      "price": 36999000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/imac-24-no-id-blue-selection-hero-202310?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697303846093",
+      "specs": [
+        "Chip Apple M3",
+        "Màn hình Retina 4.5K 24 inch",
+        "Camera FaceTime HD 1080p",
+        "Hệ thống 6 loa âm thanh đa chiều"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Mac Studio",
+      "category": "mac",
+      "price": 54999000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mac-studio-select-202306?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1684345161143",
+      "specs": [
+        "Chip Apple M2 Max hoặc Ultra",
+        "Hỗ trợ tối đa 8 màn hình",
+        "12 cổng kết nối hiệu năng cao",
+        "Thiết kế nhỏ gọn phi thường"
+      ]
+    },
+    {
+      "id": "9",
+      "name": "iPad Air M2",
+      "category": "ipad",
+      "price": 16999000,
+      "image": "/images/ipadairM2.png",
+      "specs": [
+        "Chip Apple M2",
+        "Màn hình Liquid Retina",
+        "Camera trước ngang 12MP"
+      ]
+    },
+    {
+      "id": "10",
+      "name": "iPad (Gen 10)",
+      "category": "ipad",
+      "price": 9990000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-10th-gen-finish-select-202212-blue-wifi?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1667592185566",
+      "specs": [
+        "Thiết kế toàn màn hình",
+        "Chip A14 Bionic",
+        "4 màu sắc cá tính"
+      ]
+    },
+    {
+      "id": "11",
+      "name": "iPad mini",
+      "category": "ipad",
+      "price": 13999000,
+      "image": "/images/ipad_mini.jpg",
+      "specs": [
+        "Nhỏ gọn vừa lòng bàn tay",
+        "Chip A15 Bionic",
+        "Kết nối 5G siêu tốc"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "iPad Pro M4",
+      "category": "ipad",
+      "price": 28999000,
+      "image": "/images/ipadproM.jpg",
+      "specs": [
+        "Chip M4 siêu mạnh",
+        "Màn hình OLED Ultra Retina XDR",
+        "Hỗ trợ Apple Pencil Pro"
+      ]
+    },
+    {
+      "id": "12",
+      "name": "iPhone 15 Plus",
+      "category": "iphone",
+      "price": 25999000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-15-pink-select-202309?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923765851",
+      "specs": [
+        "Dynamic Island",
+        "Camera chính 48MP",
+        "Cổng USB-C"
+      ]
+    },
+    {
+      "id": "13",
+      "name": "iPhone 14",
+      "category": "iphone",
+      "price": 19999000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-blue-select-202209?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661962383863",
+      "specs": [
+        "Hệ thống camera kép",
+        "Pin cả ngày",
+        "Chip A15 Bionic"
+      ]
+    },
+    {
+      "id": "14",
+      "name": "iPhone SE",
+      "category": "iphone",
+      "price": 11999000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-se-midnight-select-202203?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1646061171736",
+      "specs": [
+        "Thiết kế cổ điển",
+        "Nút Home Touch ID",
+        "Nhỏ gọn"
+      ]
+    },
+    {
+      "id": "15",
+      "name": "Apple Watch Series 9",
+      "category": "watch",
+      "price": 10999000,
+      "image": "/images/series11.png",
+      "specs": [
+        "Chip S9 SiP",
+        "Màn hình sáng gấp đôi",
+        "Thao tác Chạm Hai Lần"
+      ]
+    },
+    {
+      "id": "16",
+      "name": "Apple Watch Ultra 2",
+      "category": "watch",
+      "price": 21999000,
+      "image": "/images/applewatch-ultra2.png",
+      "specs": [
+        "Vỏ Titan",
+        "GPS băng tần kép",
+        "Pin lên đến 36 giờ"
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Apple Watch SE",
+      "category": "watch",
+      "price": 6499000,
+      "image": "/images/watchse3.png",
+      "specs": [
+        "Các tính năng thiết yếu",
+        "Phát hiện va chạm",
+        "Theo dõi giấc ngủ"
+      ]
+    },
+    {
+      "id": "18",
+      "name": "Ốp Lưng MagSafe Silicon",
+      "category": "accessories",
+      "device": "iphone",
+      "price": 1499000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MT1W3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1693248280978",
+      "specs": [
+        "Tương thích MagSafe",
+        "Lớp lót Microfiber mềm",
+        "Chống va đập"
+      ]
+    },
+    {
+      "id": "19",
+      "name": "Ví Da FineWoven",
+      "category": "accessories",
+      "device": "iphone",
+      "price": 1699000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MT243?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1693009953940",
+      "specs": [
+        "Chứa được 3 thẻ",
+        "Find My tích hợp",
+        "Vải tinh dệt bền bỉ"
+      ]
+    },
+    {
+      "id": "20",
+      "name": "Apple Pencil (USB-C)",
+      "category": "accessories",
+      "device": "ipad",
+      "price": 2199000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MUWA3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1696611364376",
+      "specs": [
+        "Kết nối USB-C",
+        "Độ trễ thấp",
+        "Gắn nam châm"
+      ]
+    },
+    {
+      "id": "21",
+      "name": "Magic Keyboard iPad Pro",
+      "category": "accessories",
+      "device": "ipad",
+      "price": 8999000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MWR53?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1713306915833",
+      "specs": [
+        "Thiết kế treo lơ lửng",
+        "Đèn nền bàn phím",
+        "Trackpad đa điểm"
+      ]
+    },
+    {
+      "id": "22",
+      "name": "Magic Mouse",
+      "category": "accessories",
+      "device": "mac",
+      "price": 2499000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MMMQ3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1645138486301",
+      "specs": [
+        "Bề mặt Multi-Touch",
+        "Pin sạc liền",
+        "Kết nối Bluetooth"
+      ]
+    },
+    {
+      "id": "23",
+      "name": "Magic Trackpad",
+      "category": "accessories",
+      "device": "mac",
+      "price": 3499000,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MMMP3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1645136899926",
+      "specs": [
+        "Cảm ứng lực Force Touch",
+        "Bề mặt kính lớn",
+        "Thao tác mượt mà"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "d7eb",
+      "name": "Lã Đạt",
+      "email": "laqdat47@gmail.com",
+      "password": "dat123456789"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1765460544068",
+      "customer": {
+        "fullName": "Lã Đạt",
+        "email": "laqdat47@gmail.com",
+        "phone": "0366039676",
+        "address": "Thành phố Hà Nội, Việt Nam",
+        "city": "Hà Nội",
+        "paymentMethod": "cod"
+      },
+      "items": [
+        {
+          "id": 2,
+          "name": "MacBook Air M2",
+          "category": "mac",
+          "price": 24999000,
+          "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/macbook-air-midnight-select-20220606?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1653084303665",
+          "specs": [
+            "Chip Apple M2",
+            "Màn hình Liquid Retina 13.6 inch",
+            "2 cổng Thunderbolt / USB 4",
+            "Pin lên đến 18 giờ"
+          ],
+          "quantity": 1
+        }
+      ],
+      "total": 24999000,
+      "status": "Pending",
+      "date": "20:42:24 11/12/2025"
+    },
+    {
+      "id": "1765461055312",
+      "customer": {
+        "fullName": "Lã Đạt",
+        "email": "laqdat47@gmail.com",
+        "phone": "0366039676",
+        "address": "Thành phố Hà Nội, Việt Nam",
+        "city": "Hà Nội",
+        "paymentMethod": "cod"
+      },
+      "items": [
+        {
+          "id": 12,
+          "name": "iPhone 15 Plus",
+          "category": "iphone",
+          "price": 25999000,
+          "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-15-pink-select-202309?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923765851",
+          "specs": [
+            "Dynamic Island",
+            "Camera chính 48MP",
+            "Cổng USB-C"
+          ],
+          "quantity": 1
+        }
+      ],
+      "total": 25999000,
+      "status": "Pending",
+      "date": "20:50:55 11/12/2025"
+    },
+    {
+      "id": "1765461266732",
+      "customer": {
+        "fullName": "Lã Đạt",
+        "email": "laqdat47@gmail.com",
+        "phone": "0366039676",
+        "address": "Phường Xuân Hòa, Tỉnh Phú Thọ",
+        "city": "TP. Hồ Chí Minh",
+        "paymentMethod": "momo"
+      },
+      "items": [
+        {
+          "id": 18,
+          "name": "Ốp Lưng MagSafe Silicon",
+          "category": "accessories",
+          "device": "iphone",
+          "price": 1499000,
+          "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MT1W3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1693248280978",
+          "specs": [
+            "Tương thích MagSafe",
+            "Lớp lót Microfiber mềm",
+            "Chống va đập"
+          ],
+          "quantity": 1
+        }
+      ],
+      "total": 1499000,
+      "status": "Pending",
+      "date": "20:54:26 11/12/2025"
+    },
+    {
+      "id": "1765506821693",
+      "customer": {
+        "fullName": "Lã Đạt",
+        "email": "laqdat47@gmail.com",
+        "phone": "0366039676",
+        "address": "Phường Xuân Hòa, Tỉnh Phú Thọ",
+        "city": "TP. Hồ Chí Minh",
+        "paymentMethod": "cod"
+      },
+      "items": [
+        {
+          "id": 1,
+          "name": "iPhone 15 Pro Max",
+          "category": "iphone",
+          "price": 34999000,
+          "image": "/images/iphone15promax.png",
+          "specs": [
+            "Vỏ Titanium",
+            "Chip A17 Pro",
+            "Camera Zoom 5x"
+          ],
+          "quantity": 1
+        }
+      ],
+      "total": 34999000,
+      "status": "Pending",
+      "date": "09:33:41 12/12/2025"
+    },
+    {
+      "id": 1768412171985,
+      "customer": {
+        "fullName": "Lã Đạt",
+        "email": "laqdat47@gmail.com",
+        "phone": "0366039676",
+        "address": "Phường Xuân Hòa, Tỉnh Phú Thọ",
+        "city": "TP. Hồ Chí Minh",
+        "paymentMethod": "cod"
+      },
+      "items": [
+        {
+          "id": "7",
+          "name": "iMac M3",
+          "category": "mac",
+          "price": 36999000,
+          "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/imac-24-no-id-blue-selection-hero-202310?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697303846093",
+          "specs": [
+            "Chip Apple M3",
+            "Màn hình Retina 4.5K 24 inch",
+            "Camera FaceTime HD 1080p",
+            "Hệ thống 6 loa âm thanh đa chiều"
+          ],
+          "quantity": 1
+        }
+      ],
+      "total": 36999000,
+      "status": "Pending",
+      "date": "00:36:11 15/1/2026"
+    }
+  ]
+}

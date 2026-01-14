@@ -1,0 +1,33 @@
+.store-page {
+  background-color: #f5f5f7; /* Màu nền xám nhạt của Store */
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+.store-header {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 80px 20px 60px; /* Căn lề trên dưới */
+}
+
+.store-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+.highlight {
+  color: #6e6e73; /* Màu xám của chữ phụ */
+}
+
+/* LƯỚI SẢN PHẨM (GRID) - QUAN TRỌNG NHẤT */
+.store-grid {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 20px;
+  
+  display: grid;
+  /* Tự động chia cột: Mỗi cột tối thiểu 280px */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+  gap: 30px; /* Khoảng cách giữa các ô */
+}

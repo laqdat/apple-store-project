@@ -1,0 +1,46 @@
+.search-page {
+  padding-top: 80px;
+  min-height: 80vh;
+}
+
+.search-input-container {
+  max-width: 600px;
+  margin: 0 auto 60px; /* Căn giữa và cách bên dưới */
+  position: relative;
+}
+
+.search-icon-large {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #86868b;
+}
+
+.search-input {
+  width: 100%;
+  padding: 20px 20px 20px 60px; /* Padding trái lớn để né cái icon */
+  font-size: 24px;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #d2d2d7;
+  outline: none;
+  color: #1d1d1f;
+}
+
+.search-input::placeholder {
+  color: #86868b;
+}
+
+/* Hiệu ứng khi gõ */
+.search-input:focus {
+  border-bottom-color: #0071e3;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 18px;
+  color: #6e6e73;
+  margin-top: 40px;
+}

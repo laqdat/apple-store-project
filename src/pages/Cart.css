@@ -1,0 +1,132 @@
+.cart-page {
+  padding-top: 60px;
+  padding-bottom: 100px;
+  min-height: 80vh;
+}
+
+.cart-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Danh sách sản phẩm */
+.cart-items {
+  border-top: 1px solid #d2d2d7;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 1px solid #d2d2d7;
+}
+
+.cart-item-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-right: 30px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 50px;
+}
+
+.cart-quantity button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #d2d2d7;
+  background: white;
+  cursor: pointer;
+}
+
+.cart-price {
+  text-align: right;
+  min-width: 120px;
+}
+
+.cart-price p {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.btn-remove {
+  color: #0071e3;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Phần tổng tiền */
+.cart-summary {
+  margin-top: 40px;
+  max-width: 400px;
+  margin-left: auto; /* Đẩy sang phải */
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #d2d2d7;
+}
+
+.btn-checkout {
+  width: 100%;
+  padding: 18px;
+  background-color: #0071e3;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.btn-checkout:hover {
+  background-color: #0077ed;
+}
+
+/* Giỏ hàng trống */
+.empty-cart {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.btn-continue {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: #e8e8ed;
+  color: black;
+  border-radius: 980px;
+  font-weight: 500;
+}

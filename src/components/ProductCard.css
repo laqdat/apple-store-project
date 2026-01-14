@@ -1,0 +1,77 @@
+.product-card {
+  background-color: #fff;
+  border-radius: 18px; /* Bo tròn góc kiểu Apple */
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  height: auto; 
+  padding-bottom: 40px;
+}
+
+/* Hiệu ứng khi di chuột vào: Nổi lên một chút */
+.product-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.card-image-container {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Giữ ảnh không bị méo */
+}
+
+.card-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 5px;
+}
+
+.card-price {
+  font-size: 14px;
+  color: #1d1d1f;
+  margin-bottom: 15px;
+}
+
+.btn-buy {
+  background-color: #0071e3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 980px; /* Viên thuốc */
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0; /* Mặc định ẩn nút mua */
+  transition: opacity 0.3s;
+}
+
+/* Khi di chuột vào thẻ thì mới hiện nút mua */
+.product-card:hover .btn-buy {
+  opacity: 1;
+}
+.product-specs {
+  list-style: none; /* Bỏ dấu chấm đầu dòng mặc định */
+  padding: 0;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.product-specs li {
+  font-size: 13px;
+  color: #6e6e73; /* Màu xám chữ thông số */
+  margin-bottom: 6px;
+  line-height: 1.4;
+}

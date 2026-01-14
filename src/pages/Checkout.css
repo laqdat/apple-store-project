@@ -1,0 +1,140 @@
+.checkout-page {
+  padding-top: 60px;
+  padding-bottom: 100px;
+  background-color: #fff;
+}
+
+.checkout-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.checkout-container {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap; /* Để responsive trên điện thoại */
+}
+
+/* CỘT TRÁI - FORM */
+.checkout-form-section {
+  flex: 2; /* Chiếm 2 phần chiều rộng */
+  min-width: 300px;
+}
+
+.checkout-form-section h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #d2d2d7;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d2d2d7;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-group input:focus, .form-group select:focus {
+  border-color: #0071e3;
+}
+
+/* THANH TOÁN RADIO BUTTON */
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #d2d2d7;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payment-option:hover {
+  background-color: #f5f5f7;
+}
+
+.payment-option.selected {
+  border-color: #0071e3;
+  background-color: #f0f8ff;
+}
+
+.payment-option input {
+  margin-right: 15px;
+  accent-color: #0071e3;
+}
+
+/* CỘT PHẢI - TÓM TẮT */
+.checkout-summary-section {
+  flex: 1; /* Chiếm 1 phần chiều rộng */
+  min-width: 280px;
+}
+
+.summary-card {
+  background-color: #f5f5f7;
+  padding: 30px;
+  border-radius: 18px;
+  position: sticky; /* Dính lại khi cuộn chuột */
+  top: 100px;
+}
+
+.summary-items {
+  margin-bottom: 20px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.summary-total-row {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #d2d2d7;
+  padding-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.btn-place-order {
+  width: 100%;
+  padding: 15px;
+  background-color: #0071e3;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-place-order:hover {
+  background-color: #0077ed;
+}

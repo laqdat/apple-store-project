@@ -1,0 +1,165 @@
+.watch-page {
+  background-color: #f5f5f7;
+  padding-bottom: 100px;
+  overflow-x: hidden;
+}
+
+/* HERO */
+.watch-hero {
+  text-align: center;
+  padding-top: 60px;
+  background-color: #fff;
+  padding-bottom: 40px;
+}
+
+.watch-title {
+  font-size: 70px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.watch-subtitle {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  color: #1d1d1f;
+}
+
+.watch-video-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.watch-video-container {
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 40px; /* Bo tròn nhiều hơn chút cho giống mặt đồng hồ */
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  will-change: transform;
+}
+
+.watch-video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* FEATURES - DARK MODE */
+.watch-features {
+  background-color: #000; /* Nền đen chủ đạo */
+  color: #fff;
+  padding: 100px 20px;
+  margin-top: -20px; /* Kéo lên một chút để che chân video */
+}
+
+.features-title {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 60px;
+}
+
+.watch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.watch-card {
+  background-color: #1c1c1e; /* Màu xám đen của WatchOS */
+  border-radius: 30px;
+  padding: 40px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.watch-card:hover {
+  transform: scale(1.03);
+  background-color: #2c2c2e;
+}
+
+.watch-card h3 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #fff, #888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.watch-card p {
+  font-size: 18px;
+  color: #a1a1a6;
+  line-height: 1.5;
+}
+
+/* Trang trí riêng từng thẻ */
+.card-health {
+  background: radial-gradient(circle at top right, #ff3b3033, transparent), #1c1c1e;
+}
+
+.card-connect {
+  background: radial-gradient(circle at top right, #30b0ff33, transparent), #1c1c1e;
+}
+
+.card-safety {
+  background: radial-gradient(circle at top right, #ffcc0033, transparent), #1c1c1e;
+}
+
+/* VẼ VÒNG TRÒN ACTIVITY (CSS ART) */
+.activity-rings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100px;
+  margin-top: 20px;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 4px solid transparent;
+}
+
+.ring-red {
+  width: 80px;
+  height: 80px;
+  border-color: #fa114f; /* Màu đỏ Move */
+  opacity: 0.8;
+}
+
+.ring-green {
+  width: 55px;
+  height: 55px;
+  border-color: #aaff00; /* Màu xanh Exercise */
+  opacity: 0.8;
+}
+
+.ring-blue {
+  width: 30px;
+  height: 30px;
+  border-color: #00d9f9; /* Màu xanh Stand */
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .watch-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* PRODUCTS */
+.watch-products-section {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}

@@ -1,0 +1,83 @@
+.navbar {
+  background-color: #f5f5f7; /* Màu xám đặc trưng */
+  height: 44px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  font-size: 12px; /* Chữ nhỏ tinh tế */
+}
+
+.navbar-container {
+  max-width: 1000px; /* Độ rộng chuẩn của nội dung Apple */
+  margin: 0 auto; /* CĂN GIỮA TUYỆT ĐỐI */
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px; /* Khoảng cách giữa các chữ */
+}
+
+.nav-link {
+  color: #333;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.nav-link:hover, .nav-logo:hover, .nav-icons a:hover {
+  opacity: 1;
+  color: #000;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 20px;
+  color: #333;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.user-name {
+  color: #0071e3; /* Màu xanh Apple */
+  font-weight: 500;
+}
+
+.btn-logout {
+  background: none;
+  border: 1px solid #d2d2d7;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.login-link {
+  font-size: 12px;
+  color: #1d1d1f;
+  text-decoration: none;
+}
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #0071e3; /* Màu xanh hoặc đỏ tùy bạn */
+  color: white;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
