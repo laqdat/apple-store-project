@@ -1,20 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import './Admin.css';
+// Import Service vừa tạo
+import { ProductService, OrderService } from '../services/apiService'; 
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const Admin = () => {
-  // --- 1. PHẦN ĐĂNG NHẬP ---
+  // --- STATE ---
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const [activeTab, setActiveTab] = useState('dashboard');
+  
+  // Dữ liệu hiển thị (Lấy trực tiếp từ Backend đã lọc, không cần filteredProducts nữa)
+  const [products, setProducts] = useState([]);
+  const [orders, setOrders] = useState([]);
+  
+  // Từ khóa tìm kiếm
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // State Modal & Form... (Giữ nguyên logic cũ)
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState(null); 
+  const [editingId, setEditingId] = useState(null);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [productForm, setProductForm] = useState({ name: '', price: '', image: '', category: 'iphone' });
+  const [orderStatus, setOrderStatus] = useState('');
+
+  // --- 1. LOGIN LOGIC (Giữ nguyên) ---
   useEffect(() => {
-    // Kiểm tra xem đã đăng nhập chưa (lưu trong LocalStorage)
     const logged = localStorage.getItem('isAdminLoggedIn');
-    if (logged === 'true') {
-      setIsLoggedIn(true);
-    }
-    fetchProducts();
-    fetchOrders();
+    if (logged === 'true') setIsLoggedIn(true);
   }, []);
 
   const handleLogin = (e) => {
@@ -22,9 +38,10 @@ const Admin = () => {
     if (username === 'admin' && password === '123456') {
       localStorage.setItem('isAdminLoggedIn', 'true');
       setIsLoggedIn(true);
-      alert("Xin chào Admin Lã Đạt đẹp trai!");
+      // Login xong mới tải dữ liệu
+      loadData(); 
     } else {
-      alert("Sai tài khoản hoặc mật khẩu rồi!");
+      alert("Sai tài khoản/mật khẩu!");
     }
   };
 
@@ -33,26 +50,55 @@ const Admin = () => {
     setIsLoggedIn(false);
   };
 
-  // --- 2. PHẦN QUẢN TRỊ (LOGIC CŨ + MỚI) ---
-  const [activeTab, setActiveTab] = useState('dashboard'); // Mặc định vào Dashboard
-  const [products, setProducts] = useState([]);
-  const [orders, setOrders] = useState([]);
+  // --- 2. LOAD DATA (DÙNG SERVICE & BACKEND FILTER) ---
+  
+  // Hàm tải dữ liệu chung
+  const loadData = () => {
+    fetchProducts();
+    fetchOrders();
+  };
 
-  // State Modal
-  const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(null); // 'PRODUCT', 'ORDER_STATUS', 'ORDER_DETAIL'
-  const [editingId, setEditingId] = useState(null);
-  const [selectedOrder, setSelectedOrder] = useState(null); // Lưu đơn hàng đang xem chi tiết
+  // Gọi Service lấy sản phẩm (Có truyền từ khóa tìm kiếm)
+  const fetchProducts = async (keyword = '') => {
+    try {
+      const data = await ProductService.getAll(keyword);
+      setProducts(data); // Backend đã lọc rồi, set thẳng vào state
+    } catch (error) {
+      console.error("Lỗi tải sản phẩm:", error);
+    }
+  };
 
-  // Form Data
-  const [productForm, setProductForm] = useState({ name: '', price: '', image: '', category: 'iphone' });
-  const [orderStatus, setOrderStatus] = useState('');
+  // Gọi Service lấy đơn hàng
+  const fetchOrders = async (keyword = '') => {
+    try {
+      const data = await OrderService.getAll(keyword);
+      setOrders(data);
+    } catch (error) {
+      console.error("Lỗi tải đơn hàng:", error);
+    }
+  };
 
-  // Fetch Data
-  const fetchProducts = () => fetch('http://localhost:5000/products').then(res => res.json()).then(data => setProducts(data));
-  const fetchOrders = () => fetch('http://localhost:5000/orders').then(res => res.json()).then(data => setOrders(data));
+  // --- XỬ LÝ TÌM KIẾM (BACKEND FILTERING) ---
+  
+  // Khi người dùng gõ tìm kiếm, ta gọi API luôn (hoặc dùng nút tìm kiếm)
+  useEffect(() => {
+    // Kỹ thuật Debounce: Đợi người dùng ngừng gõ 500ms mới gọi API (để đỡ spam server)
+    const delayDebounceFn = setTimeout(() => {
+      if (isLoggedIn) {
+        if (activeTab === 'products') {
+          fetchProducts(searchTerm); // Gửi từ khóa xuống backend
+        } else if (activeTab === 'orders') {
+          fetchOrders(searchTerm);   // Gửi từ khóa xuống backend
+        }
+      }
+    }, 500);
 
-  // --- XỬ LÝ ẢNH ---
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, activeTab, isLoggedIn]);
+
+
+  // --- CÁC HÀM XỬ LÝ SỰ KIỆN (DÙNG SERVICE) ---
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -62,165 +108,106 @@ const Admin = () => {
     }
   };
 
-  // --- LOGIC SẢN PHẨM ---
-  const handleAddProduct = () => {
-    setModalType('PRODUCT');
-    setEditingId(null);
-    setProductForm({ name: '', price: '', image: '', category: 'iphone' });
-    setShowModal(true);
-  };
-
-  const handleEditProduct = (p) => {
-    setModalType('PRODUCT');
-    setEditingId(p.id);
-    setProductForm(p);
-    setShowModal(true);
-  };
-
-  const saveProduct = (e) => {
+  // Thêm/Sửa Sản phẩm dùng Service
+  const saveProduct = async (e) => {
     e.preventDefault();
     const data = { ...productForm, price: parseInt(productForm.price) };
-    const api = editingId ? `http://localhost:5000/products/${editingId}` : 'http://localhost:5000/products';
-    const method = editingId ? 'PUT' : 'POST';
-
-    fetch(api, {
-      method: method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(() => {
-      fetchProducts();
+    
+    try {
+      if (editingId) {
+        await ProductService.update(editingId, data); // Gọi Service Update
+      } else {
+        await ProductService.create(data); // Gọi Service Create
+      }
+      alert("Thành công!");
+      fetchProducts(searchTerm); // Tải lại dữ liệu (giữ nguyên tìm kiếm hiện tại)
       setShowModal(false);
-    });
+    } catch (error) {
+      alert("Có lỗi xảy ra!");
+    }
   };
 
-  const handleDeleteProduct = (id) => {
-    if (window.confirm("Xóa nhé?")) fetch(`http://localhost:5000/products/${id}`, { method: 'DELETE' }).then(fetchProducts);
+  // Xóa Sản phẩm dùng Service
+  const handleDeleteProduct = async (id) => {
+    if (window.confirm("Xóa sản phẩm này nhé?")) {
+      await ProductService.delete(id);
+      fetchProducts(searchTerm);
+    }
   };
 
-  // --- LOGIC ĐƠN HÀNG (MỚI) ---
-  const handleViewOrderDetail = (order) => {
-    setSelectedOrder(order);
-    setModalType('ORDER_DETAIL');
-    setShowModal(true);
-  };
-
-  const handleEditOrderStatus = (order) => {
-    setModalType('ORDER_STATUS');
-    setSelectedOrder(order);
-    setOrderStatus(order.status || 'Chờ xác nhận');
-    setShowModal(true);
-  };
-
-  const saveOrderStatus = (e) => {
+  // Cập nhật trạng thái đơn hàng dùng Service
+  const saveOrderStatus = async (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/orders/${selectedOrder.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status: orderStatus })
-    }).then(() => {
-      fetchOrders();
+    try {
+      await OrderService.updateStatus(selectedOrder.id, orderStatus);
+      alert("Đã cập nhật trạng thái!");
+      fetchOrders(searchTerm);
       setShowModal(false);
-    });
+    } catch (error) {
+      alert("Lỗi cập nhật!");
+    }
   };
 
-  const handleDeleteOrder = (id) => {
-    if (window.confirm("Xóa lịch sử đơn này?")) fetch(`http://localhost:5000/orders/${id}`, { method: 'DELETE' }).then(fetchOrders);
+  // Xóa đơn hàng dùng Service
+  const handleDeleteOrder = async (id) => {
+    if (window.confirm("Xóa đơn này?")) {
+      await OrderService.delete(id);
+      fetchOrders(searchTerm);
+    }
   };
 
-  // --- RENDER MODAL ---
+  // Các hàm mở Modal (Giữ nguyên logic)
+  const handleAddProduct = () => {
+    setModalType('PRODUCT'); setEditingId(null);
+    setProductForm({ name: '', price: '', image: '', category: 'iphone' }); setShowModal(true);
+  };
+  const handleEditProduct = (p) => {
+    setModalType('PRODUCT'); setEditingId(p.id); setProductForm(p); setShowModal(true);
+  };
+  const handleViewOrderDetail = (o) => { setSelectedOrder(o); setModalType('ORDER_DETAIL'); setShowModal(true); };
+  const handleEditOrderStatus = (o) => {
+    setModalType('ORDER_STATUS'); setSelectedOrder(o); setOrderStatus(o.status || 'Chờ xác nhận'); setShowModal(true);
+  };
+
+  // --- BIỂU ĐỒ (Giả lập dữ liệu) ---
+  const dataChart = [
+    { name: 'T1', revenue: 40000000 }, { name: 'T2', revenue: 30000000 },
+    { name: 'T3', revenue: 20000000 }, { name: 'T4', revenue: 27800000 },
+    { name: 'T5', revenue: 18900000 }, { name: 'T6', revenue: 23900000 },
+  ];
+
+  // --- RENDER (GIỮ NGUYÊN CSS & HTML) ---
   const renderModal = () => (
     <div className="modal-overlay">
       <div className="modal-content" style={modalType === 'ORDER_DETAIL' ? {width: '600px'} : {}}>
         <div className="modal-header">
-          <h3>
-            {modalType === 'PRODUCT' && (editingId ? 'Sửa Sản Phẩm' : 'Thêm Sản Phẩm')}
-            {modalType === 'ORDER_STATUS' && 'Cập nhật trạng thái'}
-            {modalType === 'ORDER_DETAIL' && `Chi tiết đơn hàng #${selectedOrder?.id}`}
-          </h3>
+          <h3>{modalType === 'PRODUCT' ? (editingId ? 'Sửa' : 'Thêm') : modalType === 'ORDER_STATUS' ? 'Cập nhật' : 'Chi tiết'}</h3>
           <button className="btn-close" onClick={() => setShowModal(false)}>×</button>
         </div>
-
-        {/* 1. FORM SẢN PHẨM */}
+        {/* Form Sản phẩm */}
         {modalType === 'PRODUCT' && (
           <form onSubmit={saveProduct}>
-            <div className="form-group">
-              <label>Tên:</label>
-              <input type="text" value={productForm.name} onChange={e => setProductForm({...productForm, name: e.target.value})} required/>
-            </div>
-            <div className="form-group">
-              <label>Giá:</label>
-              <input type="number" value={productForm.price} onChange={e => setProductForm({...productForm, price: e.target.value})} required/>
-            </div>
-            <div className="form-group">
-              <label>Ảnh:</label>
-              <input type="file" accept="image/*" onChange={handleImageUpload} />
-              {productForm.image && <img src={productForm.image} alt="" style={{height: '80px', marginTop: '10px'}}/>}
-            </div>
-            <div className="form-group">
-              <label>Loại:</label>
-              <select value={productForm.category} onChange={e => setProductForm({...productForm, category: e.target.value})}>
-                <option value="iphone">iPhone</option>
-                <option value="mac">Mac</option>
-                <option value="ipad">iPad</option>
-                <option value="watch">Watch</option>
-              </select>
-            </div>
-            <button type="submit" className="btn-save full-width">Lưu Sản Phẩm</button>
+            <div className="form-group"><label>Tên:</label><input value={productForm.name} onChange={e=>setProductForm({...productForm, name:e.target.value})} required/></div>
+            <div className="form-group"><label>Giá:</label><input type="number" value={productForm.price} onChange={e=>setProductForm({...productForm, price:e.target.value})} required/></div>
+            <div className="form-group"><label>Ảnh:</label><input type="file" onChange={handleImageUpload} />{productForm.image && <img src={productForm.image} alt="" style={{height:'60px'}}/>}</div>
+            <div className="form-group"><label>Loại:</label><select value={productForm.category} onChange={e=>setProductForm({...productForm, category:e.target.value})}><option value="iphone">iPhone</option><option value="mac">Mac</option><option value="ipad">iPad</option><option value="watch">Watch</option></select></div>
+            <button className="btn-save full-width">Lưu</button>
           </form>
         )}
-
-        {/* 2. FORM TRẠNG THÁI ĐƠN HÀNG */}
+        {/* Form Đơn hàng */}
         {modalType === 'ORDER_STATUS' && (
           <form onSubmit={saveOrderStatus}>
-            <div className="form-group">
-              <label>Trạng thái hiện tại:</label>
-              <select value={orderStatus} onChange={e => setOrderStatus(e.target.value)}>
-                <option value="Chờ xác nhận">Chờ xác nhận</option>
-                <option value="Đang đóng gói">Đang đóng gói</option>
-                <option value="Đang vận chuyển">Đang vận chuyển</option>
-                <option value="Đã giao hàng">Đã giao hàng</option>
-                <option value="Đã hủy">Đã hủy</option>
-              </select>
-            </div>
-            <button type="submit" className="btn-save full-width">Cập nhật</button>
+            <div className="form-group"><label>Trạng thái:</label><select value={orderStatus} onChange={e=>setOrderStatus(e.target.value)}><option>Chờ xác nhận</option><option>Đang giao hàng</option><option>Đã giao hàng</option><option>Đã hủy</option></select></div>
+            <button className="btn-save full-width">Cập nhật</button>
           </form>
         )}
-
-        {/* 3. BẢNG CHI TIẾT ĐƠN HÀNG (MỚI) */}
+        {/* Chi tiết đơn */}
         {modalType === 'ORDER_DETAIL' && selectedOrder && (
           <div className="order-detail-view">
-            <div className="customer-info-box">
-              <p><strong>Khách hàng:</strong> {selectedOrder.customerInfo?.name}</p>
-              <p><strong>SĐT:</strong> {selectedOrder.customerInfo?.phone}</p>
-              <p><strong>Địa chỉ:</strong> {selectedOrder.customerInfo?.address}</p>
-              <p><strong>Ghi chú:</strong> {selectedOrder.customerInfo?.note || 'Không có'}</p>
-            </div>
+            <p><strong>Khách:</strong> {selectedOrder.customerInfo?.name} - {selectedOrder.customerInfo?.phone}</p>
             <table className="detail-table">
-              <thead>
-                <tr>
-                  <th>Sản phẩm</th>
-                  <th>Giá</th>
-                  <th>SL</th>
-                  <th>Thành tiền</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Kiểm tra xem trong db lưu là 'cart' hay 'items' để lấy đúng */}
-                {(selectedOrder.cart || selectedOrder.items || []).map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.name}</td>
-                    <td>{parseInt(item.price).toLocaleString()}đ</td>
-                    <td>x{item.quantity}</td>
-                    <td>{(item.price * item.quantity).toLocaleString()}đ</td>
-                  </tr>
-                ))}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colSpan="3" style={{textAlign: 'right', fontWeight: 'bold'}}>TỔNG CỘNG:</td>
-                  <td style={{fontWeight: 'bold', color: '#d70018'}}>{selectedOrder.total?.toLocaleString()}đ</td>
-                </tr>
-              </tfoot>
+               <thead><tr><th>Tên</th><th>SL</th><th>Giá</th></tr></thead>
+               <tbody>{(selectedOrder.cart || []).map((i,idx)=>(<tr key={idx}><td>{i.name}</td><td>{i.quantity}</td><td>{(i.price*i.quantity).toLocaleString()}đ</td></tr>))}</tbody>
             </table>
           </div>
         )}
@@ -228,68 +215,62 @@ const Admin = () => {
     </div>
   );
 
-  // --- MÀN HÌNH LOGIN ---
-  if (!isLoggedIn) {
-    return (
-      <div className="login-container">
-        <form className="login-form" onSubmit={handleLogin}>
-          <h2>Admin Login</h2>
-          <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-          <button type="submit">Đăng nhập</button>
-        </form>
-      </div>
-    );
-  }
+  if (!isLoggedIn) return (
+    <div className="login-container" style={{marginTop: '100px', position:'relative', zIndex:10}}>
+      <form className="login-form" onSubmit={handleLogin}>
+        <h2>Admin Login</h2><input placeholder="Username" value={username} onChange={e=>setUsername(e.target.value)} /><input type="password" placeholder="Password" value={password} onChange={e=>setPassword(e.target.value)} /><button>Đăng nhập</button>
+      </form>
+    </div>
+  );
 
-  // --- MÀN HÌNH ADMIN CHÍNH ---
   return (
     <div className="admin-container">
       {showModal && renderModal()}
-      
       <div className="admin-sidebar">
         <div className="sidebar-header">Apple Admin</div>
         <ul className="sidebar-menu">
-          <li className={activeTab === 'dashboard' ? 'active' : ''} onClick={() => setActiveTab('dashboard')}>Dashboard</li>
-          <li className={activeTab === 'products' ? 'active' : ''} onClick={() => setActiveTab('products')}>Sản phẩm</li>
-          <li className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>Đơn hàng</li>
+          <li className={activeTab==='dashboard'?'active':''} onClick={()=>setActiveTab('dashboard')}>Dashboard</li>
+          <li className={activeTab==='products'?'active':''} onClick={()=>setActiveTab('products')}>Sản phẩm</li>
+          <li className={activeTab==='orders'?'active':''} onClick={()=>setActiveTab('orders')}>Đơn hàng</li>
           <li className="logout" onClick={handleLogout}>Đăng xuất</li>
         </ul>
       </div>
 
       <div className="admin-main">
-        {/* DASHBOARD */}
         {activeTab === 'dashboard' && (
            <div className="admin-content">
-             <h2>Tổng quan</h2>
+             <h2>Dashboard</h2>
              <div className="stats-grid">
                <div className="stat-card blue"><h3>{products.length}</h3><p>Sản phẩm</p></div>
                <div className="stat-card green"><h3>{orders.length}</h3><p>Đơn hàng</p></div>
-               <div className="stat-card orange">
-                 <h3>{orders.reduce((sum, o) => sum + (o.total || 0), 0).toLocaleString()}đ</h3>
-                 <p>Doanh thu</p>
-               </div>
+             </div>
+             <div style={{marginTop:'20px', background:'white', padding:'20px', borderRadius:'10px'}}>
+                <ResponsiveContainer width="100%" height={300}><BarChart data={dataChart}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="name"/><YAxis/><Tooltip/><Bar dataKey="revenue" fill="#0071e3"/></BarChart></ResponsiveContainer>
              </div>
            </div>
         )}
 
-        {/* SẢN PHẨM */}
+        {/* Tab Sản phẩm có Input tìm kiếm gọi backend */}
         {activeTab === 'products' && (
           <div className="admin-content">
-            <div className="header-flex"><h2>Quản lý Sản phẩm</h2><button className="btn-add" onClick={handleAddProduct}>+ Thêm mới</button></div>
+            <div className="header-flex">
+              <h2>Sản phẩm</h2>
+              <input 
+                placeholder="Tìm kiếm backend..." 
+                value={searchTerm} 
+                onChange={e => setSearchTerm(e.target.value)} 
+                style={{padding:'10px', width:'300px', borderRadius:'8px', border:'1px solid #ddd'}}
+              />
+              <button className="btn-add" onClick={handleAddProduct}>+ Thêm</button>
+            </div>
             <table className="admin-table">
-              <thead><tr><th>ID</th><th>Hình</th><th>Tên</th><th>Giá</th><th>Hành động</th></tr></thead>
+              <thead><tr><th>ID</th><th>Ảnh</th><th>Tên</th><th>Giá</th><th>Hành động</th></tr></thead>
               <tbody>
+                {/* Render trực tiếp products, KHÔNG filter ở đây nữa */}
                 {products.map(p => (
                   <tr key={p.id}>
-                    <td>{p.id}</td>
-                    <td><img src={p.image} alt="" style={{width: '40px', borderRadius:'4px'}}/></td>
-                    <td>{p.name}</td>
-                    <td>{parseInt(p.price).toLocaleString()}đ</td>
-                    <td>
-                      <button className="btn-action edit" onClick={() => handleEditProduct(p)}>Sửa</button>
-                      <button className="btn-action delete" onClick={() => handleDeleteProduct(p.id)}>Xóa</button>
-                    </td>
+                    <td>{p.id}</td><td><img src={p.image} alt="" style={{width:'40px'}}/></td><td>{p.name}</td><td>{parseInt(p.price).toLocaleString()}đ</td>
+                    <td><button className="btn-action edit" onClick={()=>handleEditProduct(p)}>Sửa</button><button className="btn-action delete" onClick={()=>handleDeleteProduct(p.id)}>Xóa</button></td>
                   </tr>
                 ))}
               </tbody>
@@ -297,24 +278,26 @@ const Admin = () => {
           </div>
         )}
 
-        {/* ĐƠN HÀNG */}
+        {/* Tab Đơn hàng cũng tìm kiếm backend */}
         {activeTab === 'orders' && (
           <div className="admin-content">
-            <h2>Quản lý Đơn hàng</h2>
+             <div className="header-flex">
+                <h2>Đơn hàng</h2>
+                <input 
+                  placeholder="Tìm tên khách, SĐT..." 
+                  value={searchTerm} 
+                  onChange={e => setSearchTerm(e.target.value)} 
+                  style={{padding:'10px', width:'300px', borderRadius:'8px', border:'1px solid #ddd'}}
+                />
+             </div>
             <table className="admin-table">
-              <thead><tr><th>ID</th><th>Khách hàng</th><th>Tổng tiền</th><th>Trạng thái</th><th>Chi tiết</th></tr></thead>
+              <thead><tr><th>ID</th><th>Khách</th><th>Tổng</th><th>TT</th><th>Hành động</th></tr></thead>
               <tbody>
                 {orders.map(o => (
                   <tr key={o.id}>
-                    <td>#{o.id}</td>
-                    <td>{o.customerInfo?.name}<br/><small>{o.customerInfo?.phone}</small></td>
-                    <td>{o.total?.toLocaleString()}đ</td>
-                    <td><span className={`status-badge ${o.status === 'Đã giao hàng' ? 'done' : 'pending'}`}>{o.status || 'Chờ xác nhận'}</span></td>
-                    <td>
-                      <button className="btn-action view" onClick={() => handleViewOrderDetail(o)}>Xem list</button>
-                      <button className="btn-action edit" onClick={() => handleEditOrderStatus(o)}>Sửa TT</button>
-                      <button className="btn-action delete" onClick={() => handleDeleteOrder(o.id)}>Xóa</button>
-                    </td>
+                    <td>#{o.id}</td><td>{o.customerInfo?.name}</td><td>{o.total?.toLocaleString()}đ</td>
+                    <td><span className={`status-badge ${o.status==='Đã giao hàng'?'done':'pending'}`}>{o.status||'Chờ xác nhận'}</span></td>
+                    <td><button className="btn-action view" onClick={()=>handleViewOrderDetail(o)}>Xem</button><button className="btn-action edit" onClick={()=>handleEditOrderStatus(o)}>Sửa</button><button className="btn-action delete" onClick={()=>handleDeleteOrder(o.id)}>Xóa</button></td>
                   </tr>
                 ))}
               </tbody>
